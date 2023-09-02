@@ -6,7 +6,7 @@ class CartItem extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: 'Phone',
+            title: 'IPhone',
             price: 999,
             qty: 1,
             img: ''
@@ -36,9 +36,15 @@ class CartItem extends React.Component {
     decreaseQuantity = () => {
         // Get the current quantity 
         // Decrease the value and re render the JSX
+
         this.setState((previousState) => {
-            return {
-                qty: previousState.qty - 1,
+            if (previousState.qty > 0) {
+                return {
+                    qty: previousState.qty - 1,
+                }
+            }
+            else{
+                return;
             }
         })
     }
@@ -48,10 +54,12 @@ class CartItem extends React.Component {
         const { title, price, qty } = this.state;
 
         return (
-            <div className='cart-items'>
+            <div className='cart-item'>
+
                 <div className="left-block">
                     <img style={style.image} />
                 </div>
+
                 <div className="right-block">
                     <div style={{ fontSize: 25 }}>
                         {title}
@@ -65,10 +73,12 @@ class CartItem extends React.Component {
                     <div className='cart-item-action'>
                         {/* Buttons to alter quantity */}
                         <img alt="Add" className='action-icons' src="https://cdn-icons-png.flaticon.com/128/992/992651.png" onClick={this.increaseQuantity} />
-                        <img alt="Remove" className='action-icons' src="https://cdn-icons-png.flaticon.com/128/1828/1828906.png" onClick={this.decreaseQuantity}/>
+                        <img alt="Remove" className='action-icons' src="https://cdn-icons-png.flaticon.com/128/1828/1828906.png" onClick={this.decreaseQuantity} />
                         <img alt="Delete" className='action-icons' src="https://cdn-icons-png.flaticon.com/128/1214/1214428.png" />
                     </div>
+
                 </div>
+
             </div>
         );
     }
